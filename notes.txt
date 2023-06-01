@@ -1,0 +1,14 @@
+Important notes about programming minecraft modifications:
+
+    MODID can only be lowercase and may contain only numbers, dashes and underscores
+        !!no white spaces and any other special characters!!
+
+    Once you have done with your scripts, you may share your mod as a .jar application file with other people or post it in the internet for others to use!
+
+        To do this:
+            1. execute gradle './gradlew build' command in the terminal from project level
+            2. navigate to ./build/libs/<projectName>.jar file
+            3. Use this .jar file as it is your mode file.
+
+        You may then paste this file under 'mods' folder in %appdata%/.minecraft location
+
