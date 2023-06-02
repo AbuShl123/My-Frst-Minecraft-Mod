@@ -1,7 +1,6 @@
 package net.abushl123.tutorialmod.item;
 
 import net.abushl123.tutorialmod.MyFirstMod;
-import net.minecraft.client.tutorial.Tutorial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;

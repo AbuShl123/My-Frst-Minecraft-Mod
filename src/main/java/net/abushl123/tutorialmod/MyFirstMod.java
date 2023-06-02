@@ -1,6 +1,7 @@
 package net.abushl123.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.abushl123.tutorialmod.block.ModBlocks;
 import net.abushl123.tutorialmod.item.ModCreativeModeTab;
 import net.abushl123.tutorialmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -25,6 +26,7 @@ public class MyFirstMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -42,9 +44,15 @@ public class MyFirstMod {
             event.accept(ModItems.BLACK_OPAL);
         }
 
+        if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.BLACK_OPAL_BLOCK);
+        }
+
         if (event.getTab() == ModCreativeModeTab.TUTORIAL_TAB) {
             event.accept(ModItems.RAW_BLACK_OPAL);
             event.accept(ModItems.BLACK_OPAL);
+
+            event.accept(ModBlocks.BLACK_OPAL_BLOCK);
         }
     }
 
