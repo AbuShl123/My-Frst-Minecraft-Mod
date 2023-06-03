@@ -48,11 +48,22 @@ public class MyFirstMod {
             event.accept(ModBlocks.BLACK_OPAL_BLOCK);
         }
 
+        if (event.getTab() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(ModBlocks.BLACK_OPAL_ORE);
+            event.accept(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE);
+            event.accept(ModBlocks.NETHERRACK_BLACK_OPAL_ORE);
+            event.accept(ModBlocks.ENDSTONE_BLACK_OPAL_ORE);
+        }
+
         if (event.getTab() == ModCreativeModeTab.TUTORIAL_TAB) {
             event.accept(ModItems.RAW_BLACK_OPAL);
             event.accept(ModItems.BLACK_OPAL);
 
             event.accept(ModBlocks.BLACK_OPAL_BLOCK);
+            event.accept(ModBlocks.BLACK_OPAL_ORE);
+            event.accept(ModBlocks.DEEPSLATE_BLACK_OPAL_ORE);
+            event.accept(ModBlocks.NETHERRACK_BLACK_OPAL_ORE);
+            event.accept(ModBlocks.ENDSTONE_BLACK_OPAL_ORE);
         }
     }
 

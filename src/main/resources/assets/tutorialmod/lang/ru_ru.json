@@ -1,0 +1,12 @@
+{
+  "item.tutorialmod.black_opal": "Черный Опал",
+  "item.tutorialmod.raw_black_opal": "Рудный Черный Опал",
+
+  "block.tutorialmod.black_opal_block": "Блок Черного Опала",
+  "block.tutorialmod.black_opal_ore": "Руда Черного Опала",
+  "block.tutorialmod.netherrack_black_opal_ore": "Незеритовый Черный Опал",
+  "block.tutorialmod.endstone_black_opal_ore": "Черный Опал Края",
+  "block.tutorialmod.deepslate_black_opal_ore": "Глубинный Черный Опал",
+
+  "creativemodtab.tutorial_tab": "Мой мод"
+}
