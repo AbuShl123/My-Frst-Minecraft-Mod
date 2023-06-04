@@ -1,0 +1,21 @@
+Data generation	|
+________________| 
+
+Вот это вот действительно сложно...
+
+
+	In order to make our lives easier we may create a datagen classes that will literally write json files for us 
+	So far we were writing json files by ourselves which was a tedious job
+	However, now we may use specific classes that will automate these steps 
+	
+	
+	1) Data generation is basically the automation of json files creation 
+	
+	2) all data gen. classes are locates under src/main/java/net/abushl123/tutorialmod/datagen package 
+	
+	3) In the end of the work, once generator classes are done, run RunData run configuration for json files to appear 
+		All json files will appear under src/generated [main] package 
+		Remove duplicated files that were before created under src/main/resources package 
+	
+	
+	<!> To create a world generator, we also use json files 

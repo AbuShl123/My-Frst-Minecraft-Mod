@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    private static final DeferredRegister<Block> BLOCKS =
+    public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, MyFirstMod.MOD_ID);
 
     public static final RegistryObject<Block> BLACK_OPAL_BLOCK = registerBlock("black_opal_block",
