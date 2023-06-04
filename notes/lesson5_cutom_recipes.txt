@@ -1,0 +1,14 @@
+Custom Recipes	|
+________________|
+
+    General notes:
+
+	    1) Recipes are located under src/main/resources/data/tutorialmod/recipes
+		
+	    2) Recipes are created in json files
+	
+	    3) Resources to create recipes:
+		    a. Recipe generator: https://misode.github.io/recipe/
+		    b. External libraries: Gradle: net.minecraft:client:extra:<version>
+
+		P.S: external libraries are more recommended for help

@@ -1,0 +1,24 @@
+To start with:
+
+    1. Download already prepared framework with one ExampleMod.java file (Forge)
+    2. This is a gradle project. Execute Gradle Reload command
+    3. Remove all comments in ExampleMod class and remove all items and blocks
+    4. Methods commonSetup() and addCreative() along with the contents of constructor (except those that give error) should be remained
+    5. You can rename the java class file.
+    6. Change MOI_ID to your preferred value.
+    7. Execute Gradle Tasks -> forgegradle runs -> genIntellijRuns
+    8. Now you may start the "runClient" run configuration to open the minecraft!
+
+Important notes:
+
+    <!> MODID can only be lowercase and may contain only numbers, dashes and underscores
+        !!no white spaces and any other special characters!!
+
+    <!> Once you are done with your scripts, you may share your mod as a .jar file with other people or post it in the internet for others to use
+
+            To do this:
+                1. execute gradle './gradlew build' command in the terminal from project level
+                2. navigate to ./build/libs/<projectName>.jar file
+                3. Use this .jar file as it is your mode file.
+
+            You may then paste this file under 'mods' folder in %appdata%/.minecraft location

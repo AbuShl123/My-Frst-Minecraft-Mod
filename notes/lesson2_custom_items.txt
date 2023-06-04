@@ -1,0 +1,64 @@
+Items and how to add custom items	
+_______________________________________________________________________________
+
+	What are items in the game?
+	
+		- Items are different from blocks
+		  They cannot be placed somewhere as an interactable object 
+		  Examples of items: apples, diamonds, swords etc
+
+
+	<!!!> All items are located under ModItems.java file
+	<!!!> Each item is an instance stored in the static field 
+	<!!!> MOD_ID class - is the class where the MOD_ID is defined (basically the main class) 
+
+
+	What are the items in the framework? 
+	
+		- The items in the framework are simple Item.java objects
+		  However the process of adding the item to the game is a bit complicated  
+		  
+		  
+	IMPORTANT: 
+		
+		Each Item or Block in Minecraft has a NAME 
+		For example in the command: 
+			/give @s minecraft:iron_pickaxe 
+		the "iron_pickaxe" is the name of Iron Pickaxe used across the framework 
+		
+
+_______________________________________________________________________________
+
+	How to create items: 
+	
+		<!!!> Creating the instance of Item.java is not enough to add this to the game 
+		
+		1. Create ModItems.java class --> here we will store all mod items 
+		
+		2. RegistryObject<T>.java 
+			
+			RegistryObject is a class that stores the Item or Block instnace depending on what you have provided for the generic
+			
+			However you cannot create the object of RegistryObject class directly. 
+			For this the DeferredRegister is used. 
+	
+		3. DeferredRegister<T>.java
+				
+			1) Use Item.java as a generic to register the item
+			2) Use Block.java as a generic to register the block 
+							
+			Methods: 
+				static register(...) {...}
+					- returns the RegistryObject instance with the generic of T type. 
+					- accepts arguments: 
+						1) String name ----> refer to line 26
+						2) Supplier to supply the actual instance of Item 
+						
+		
+		4. IEventBus
+			
+			1) By using DeferredRegister register the instance of IEventBus
+			2) However the instanace of IEventBus is stored in the constructor of the MOD_ID class 
+				--> pass that instnace to register it 
+		
+		5. Finally to add the item to creative mod tab use addCreative() method within MOD_ID class 
