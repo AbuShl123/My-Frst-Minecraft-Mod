@@ -39,7 +39,7 @@ _______________________________________________________________________________
 			
 			RegistryObject is a class that stores the Item or Block instnace depending on what you have provided for the generic
 			
-			However you cannot create the object of RegistryObject class directly. 
+			However, you cannot create the object of RegistryObject class directly.
 			For this the DeferredRegister is used. 
 	
 		3. DeferredRegister<T>.java
@@ -58,7 +58,7 @@ _______________________________________________________________________________
 		4. IEventBus
 			
 			1) By using DeferredRegister register the instance of IEventBus
-			2) However the instanace of IEventBus is stored in the constructor of the MOD_ID class 
-				--> pass that instnace to register it 
+			2) However the instance of IEventBus is stored in the constructor of the MOD_ID class
+				--> pass that instance to register it
 		
-		5. Finally to add the item to creative mod tab use addCreative() method within MOD_ID class 
+		5. Finally, to add the item to creative mod tab use addCreative() method within MOD_ID class
