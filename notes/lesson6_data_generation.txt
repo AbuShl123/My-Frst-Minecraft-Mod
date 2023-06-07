@@ -11,11 +11,31 @@ ________________|
 	
 	1) Data generation is basically the automation of json files creation 
 	
-	2) all data gen. classes are locates under src/main/java/net/abushl123/tutorialmod/datagen package 
+	2) All data gen. classes are locates under src/main/java/net/abushl123/tutorialmod/datagen package
 	
-	3) In the end of the work, once generator classes are done, run RunData run configuration for json files to appear 
-		All json files will appear under src/generated [main] package 
-		Remove duplicated files that were before created under src/main/resources package 
+	3) In the end of the work, once generator classes are done, run RunData run configuration for json files to appear
+	   All json files will appear under src/generated [main] package
+	   Remove duplicated files that were before created under src/main/resources package
 	
 	
-	<!> To create a world generator, we also use json files 
+	<!> Interesting fact: To create a world generator, we also use json files
+
+
+________________________________________
+Generator Classes
+________________________________________
+    </> DataGenerators.java <--
+
+            For different purposes various "Provider" classes should be written.
+            Each of those classes are specific generators that will create corresponding JSON files
+
+            1. All generator classes should be instantiated in DataGenerators.java file
+
+
+    </> ModRecipeProvider.java <--
+
+            This generator created json files for recipes in minecraft.
+            We can use multiple builders that may help us to register the recipes.
+
+            1. Extends RecipeProvider abstract class and implements IConditionBuilder interface.
+            2. All recipes are written inside buildRecipes() method which is overriden from RecipeProvider abstract class

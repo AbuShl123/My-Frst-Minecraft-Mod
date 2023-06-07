@@ -1,0 +1,43 @@
+Following Recipe builders are used to create various recipes for minecraft  |
+____________________________________________________________________________|
+
+1)
+    ShapelessRecipeBuilder.shapeless(RecipeCategory, result) // the result item
+        .requires(ItemLike) // what is required?
+        .unlockedBy(String, Criteria) // the criteria to unlock the recipe in survival game
+        .save(consumer); // always save consumer (dunno why)
+
+2)
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+        .pattern("BBB")
+        .pattern("BBB")
+        .pattern("BBB") // Create recipe pattern
+        .define('B', ItemLike) // Define what the symbol represents
+        .unlockedBy("criteria", criteria) // the criteria to unlock the recipe in survival game
+        .save(consumer); // always save consumer (dunno why)
+
+
+
+
+
+__________________________________________________________________________
+More detailed explanation
+__________________________________________________________________________
+
+    ShapelessRecipeBuilder.java -> building anything without a strict rule that defines the order in which items should be placed in the Crafting Table
+    ShapedRecipeBuilder.java -> building anything with specific order in which the Items/Blocks should be placed in Crafting Table
+
+    1) shapeless(RecipeCategory, ItemLike)
+        - RecipeCategory -> the RecipeCategory enum constant
+        - ItemLike -> the RESULT product of the recipe (i.e. which item/block will we get after executing this recipe?)
+        * arg2 is the ItemLike interface that is being implemented by both Block.java and Item.java
+
+    2) requires(ItemLike) - which item is required for building?
+
+    3) unlockedBy(String, Criteria)
+        When only starting the survival world the player does not have recipes for all items in the game.
+        However, he unlocks more recipes throughout the game progression
+        For example, when getting a wood first time, the wood items' recipes are unlocked
+
+            - unlockedBy(String, Criteria) requires argument which is a criteria (condition) for a recipe to be unlocked
+
