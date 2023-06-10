@@ -13,11 +13,8 @@ ____________________________________________________________________________|
         .pattern("BBB")
         .pattern("BBB") // Create recipe pattern
         .define('B', ItemLike) // Define what the symbol represents
-        .unlockedBy("criteria", criteria) // the criteria to unlock the recipe in survival game
-        .save(consumer); // always save consumer (dunno why)
-
-
-
+        .unlockedBy("has_item_name", criteria_trigger_instance) // the criteria to unlock the recipe in survival game
+        .save(consumer); // always save consumer
 
 
 __________________________________________________________________________
@@ -34,10 +31,15 @@ __________________________________________________________________________
 
     2) requires(ItemLike) - which item is required for building?
 
-    3) unlockedBy(String, Criteria)
+    3) unlockedBy(String, TriggerInstance)
         When only starting the survival world the player does not have recipes for all items in the game.
         However, he unlocks more recipes throughout the game progression
         For example, when getting a wood first time, the wood items' recipes are unlocked
 
-            - unlockedBy(String, Criteria) requires argument which is a criteria (condition) for a recipe to be unlocked
+            - the first String argument is usually the name of criteria and has format "has_item_name"
+            - the second argument is the actual criteria which is TriggerInstance object
 
+    4) save(Consumer, ResourceLocation(String, String)
+        - resource location defines the name of the json file and its location
+        - if to pass two arguments to ResourceLocation object the first String will be the name of folder under which to create a json file
+        - the second argument of ResourceLocation constructor is String that defines the name of json file.

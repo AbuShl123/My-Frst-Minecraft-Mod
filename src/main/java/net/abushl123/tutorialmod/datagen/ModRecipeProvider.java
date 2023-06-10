@@ -3,7 +3,6 @@ package net.abushl123.tutorialmod.datagen;
 import net.abushl123.tutorialmod.MyFirstMod;
 import net.abushl123.tutorialmod.block.ModBlocks;
 import net.abushl123.tutorialmod.item.ModItems;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -30,27 +28,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(consumer, List.of(ModItems.RAW_BLACK_OPAL.get()), RecipeCategory.MISC,
                 ModItems.BLACK_OPAL.get(), 0.7f, 200, "black_opal");
 
-        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.BLACK_OPAL.get(), RecipeCategory.MISC,
-                ModBlocks.BLACK_OPAL_BLOCK.get());
+//        nineBlockStorageRecipes(consumer, RecipeCategory.BUILDING_BLOCKS, ModItems.BLACK_OPAL.get(), RecipeCategory.MISC,
+//                ModBlocks.BLACK_OPAL_BLOCK.get());
 
-        // The following commented lines of code do the same thing as line 32 does
-
-        /*
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BLACK_OPAL.get()) // to get nine opals from one opal block
-                .requires(ModBlocks.BLACK_OPAL_BLOCK.get())
-                .unlockedBy("has_black_opal_block", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModBlocks.BLACK_OPAL_BLOCK.get()).build()))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BLACK_OPAL_BLOCK.get()) // to make opal block out of nine simple opals
-                .define('B', ModItems.BLACK_OPAL.get())
-                .pattern("BBB")
-                .pattern("BBB")
-                .pattern("BBB")
-                .unlockedBy("has_black_opal", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ModItems.BLACK_OPAL.get()).build()))
-                .save(consumer);
-         */
+        nineBlockRecipe(consumer, ModItems.BLACK_OPAL.get(), ModBlocks.BLACK_OPAL_BLOCK.get(), RecipeCategory.MISC, RecipeCategory.BUILDING_BLOCKS);
     }
 
     protected static void oreBlasting(Consumer<FinishedRecipe> p_248775_, List<ItemLike> p_251504_, RecipeCategory p_248846_, ItemLike p_249735_, float p_248783_, int p_250303_, String p_251984_) {
@@ -62,34 +43,40 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     protected static void oreCooking(Consumer<FinishedRecipe> p_250791_, RecipeSerializer<? extends AbstractCookingRecipe> p_251817_, List<ItemLike> p_249619_, RecipeCategory p_251154_, ItemLike p_250066_, float p_251871_, int p_251316_, String p_251450_, String p_249236_) {
+
         for (ItemLike itemlike : p_249619_) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), p_251154_, p_250066_, p_251871_, p_251316_, p_251817_).group(p_251450_)
-                    .unlockedBy(getHasName(itemlike), has(itemlike)).save(p_250791_, new ResourceLocation(MyFirstMod.MOD_ID, getItemName(p_250066_)) + p_249236_ + "_" + getItemName(itemlike));
+            SimpleCookingRecipeBuilder
+                    .generic(Ingredient.of(itemlike), p_251154_, p_250066_, p_251871_, p_251316_, p_251817_)
+                    .group(p_251450_)
+                    .unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(p_250791_, new ResourceLocation(MyFirstMod.MOD_ID, getItemName(p_250066_)) + p_249236_ + "_" + getItemName(itemlike));
         }
+
     }
 
-    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> p_249580_, RecipeCategory p_251203_, ItemLike p_251689_, RecipeCategory p_251376_, ItemLike p_248771_) {
-        nineBlockStorageRecipes(p_249580_, p_251203_, p_251689_, p_251376_, p_248771_, getSimpleRecipeName(p_248771_), (String) null, getSimpleRecipeName(p_251689_), (String) null);
-    }
+    protected static void nineBlockRecipe(Consumer<FinishedRecipe> writer,
+                                          ItemLike unit, ItemLike whole,
+                                          RecipeCategory toWholeRecipe,
+                                          RecipeCategory toUnitRecipe) {
+        /*
+        Pattern:
+            9 units -> 1 whole
+            1 whole -> 9 units
+         */
 
-    protected static void nineBlockStorageRecipes(Consumer<FinishedRecipe> p_250423_,
-                                                  RecipeCategory p_250083_, ItemLike p_250042_,
-                                                  RecipeCategory p_248977_, ItemLike p_251911_,
-                                                  String p_250475_, @Nullable String p_248641_,
-                                                  String p_252237_, @Nullable String p_250414_) {
-
-        ShapelessRecipeBuilder.shapeless(p_250083_, p_250042_, 9).requires(p_251911_)
-                .group(p_250414_)
-                .unlockedBy(getHasName(p_251911_), has(p_251911_))
-                .save(p_250423_, new ResourceLocation(MyFirstMod.MOD_ID, p_252237_));
-
-        ShapedRecipeBuilder.shaped(p_248977_, p_251911_)
-                .define('#', p_250042_)
+        ShapedRecipeBuilder.shaped(toWholeRecipe, whole) // whole is a result of the recipe
+                .define('#', unit)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
-                .group(p_248641_)
-                .unlockedBy(getHasName(p_250042_), has(p_250042_))
-                .save(p_250423_, new ResourceLocation(MyFirstMod.MOD_ID, p_250475_));
+                .group(null)
+                .unlockedBy(getHasName(unit), has(unit))
+                .save(writer, new ResourceLocation(MyFirstMod.MOD_ID, getSimpleRecipeName(whole))); // here we define the location of json file, and we define that the name of that file will be the name of resulting product (whole in this case)
+
+        ShapelessRecipeBuilder.shapeless(toUnitRecipe, unit, 9) // nine is the number of result products that we get
+                .requires(whole)
+                .group(null)
+                .unlockedBy(getHasName(whole), has(whole))
+                .save(writer, new ResourceLocation(MyFirstMod.MOD_ID, getSimpleRecipeName(unit)));
     }
 }
